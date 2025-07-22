@@ -11,6 +11,7 @@ mongoose
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 
 const bookSchema = new mongoose.Schema({
@@ -57,9 +58,10 @@ app.get("/books/:id", async (req, res) => {
     const newBook = await Book.findById(id);
     res.json(newBook);
   } catch (error) {
-    console.log(error);
+    console.log('error getting book',error.message);
   }
 });
+
 
 app.put("/books/:id", async (req, res) => {
   try {
